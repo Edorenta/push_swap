@@ -90,16 +90,16 @@ int		ft_atoi_mod(char *s, int *nbr)
 	return (i);
 }
 
-int		get_stack(int argc, char **argv, t_env *env)
+int		get_stack(int ac, char **av, t_env *env)
 {
 	int		i;
 	int		nbr;
 
 	i = env->index;
 	nbr = 0;
-	while (i < argc && i > 0)
+	while (i < ac && i > 0)
 	{
-		if (ft_atoi_mod(argv[i], &nbr) < 0)
+		if (ft_atoi_mod(av[i], &nbr) < 0)
 		{
 			i = -1;
 			free_stack(&(env->a_first), &(env->a_last));

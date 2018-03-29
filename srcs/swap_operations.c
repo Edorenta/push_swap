@@ -29,7 +29,7 @@ void	op_sa(t_env *e)
 		++(e->tot);
 		((e->tot) != 1) ? ft_putstr_fd(" sa", 1) : ft_putstr_fd("sa", 1);
 		if (e->options & 8)
-			print_pause(e);
+			put_pause(e);
 	}
 }
 
@@ -50,7 +50,7 @@ void	op_sb(t_env *e)
 		++(e->tot);
 		((e->tot) != 1) ? ft_putstr_fd(" sb", 1) : ft_putstr_fd("sb", 1);
 		if (e->options & 8)
-			print_pause(e);
+			put_pause(e);
 	}
 }
 
@@ -80,7 +80,7 @@ void	op_ss(t_env *e)
 		e->b_first = tmp1;
 	}
 	((e->tot) != 1) ? ft_putstr_fd(" ss", 1) : ft_putstr_fd("ss", 1);
-	(e->options & 8) ? print_pause(e) : 0;
+	(e->options & 8) ? put_pause(e) : 0;
 }
 
 void	op_pa(t_env *env)
@@ -99,8 +99,8 @@ void	op_pa(t_env *env)
 		!((env->a_first)->next) ? env->a_last = env->a_first : 0;
 		++(env->tot);
 		((env->tot) != 1) ? ft_putstr_fd(" pa", 1) : ft_putstr_fd("pa", 1);
-		if (env->options & 8)
-			print_pause(env);
+		if (OPT_STEP)
+			put_pause(env);
 		env->a_size++;
 		env->b_size--;
 	}
@@ -122,8 +122,8 @@ void	op_pb(t_env *env)
 		!(env->b_first->next) ? env->b_last = env->b_first : 0;
 		++(env->tot);
 		((env->tot) != 1) ? ft_putstr_fd(" pb", 1) : ft_putstr_fd("pb", 1);
-		if (env->options & 8)
-			print_pause(env);
+		if (OPT_STEP)
+			put_pause(env);
 		env->b_size++;
 		env->a_size--;
 	}

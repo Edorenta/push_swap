@@ -27,8 +27,8 @@ void	op_ra(t_env *env)
 		env->a_last = new_end;
 		++(env->tot);
 		((env->tot) != 1) ? ft_putstr_fd(" ra", 1) : ft_putstr_fd("ra", 1);
-		if (env->options & 8)
-			print_pause(env);
+		if (OPT_STEP)
+			put_pause(env);
 	}
 }
 
@@ -47,8 +47,8 @@ void	op_rb(t_env *env)
 		env->b_last = new_end;
 		++(env->tot);
 		((env->tot) != 1) ? ft_putstr_fd(" rb", 1) : ft_putstr_fd("rb", 1);
-		if (env->options & 8)
-			print_pause(env);
+		if (OPT_STEP)
+			put_pause(env);
 	}
 }
 
@@ -78,5 +78,5 @@ void	op_rr(t_env *env)
 	}
 	++(env->tot);
 	((env->tot) != 1) ? ft_putstr_fd(" rr", 1) : ft_putstr_fd("rr", 1);
-	(env->options & 8) ? print_pause(env) : 0;
+	OPT_STEP ? put_pause(env) : 0;
 }

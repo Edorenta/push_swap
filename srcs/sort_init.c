@@ -54,11 +54,11 @@ void	begin_sort(t_env *env)
 	{
 		ft_putstr_fd("\n		END\n", 1);
 		put_option(env);
-		(env->options & 2) ? ft_putchar('\n') : 0;
+		OPT_COUNT ? ft_putchar('\n') : 0;
 	}
 	free_stack(&(env->a_first), &(env->a_last));
 	free_stack(&(env->b_first), &(env->b_last));
-	if (env->options & 2)
+	if (OPT_COUNT)
 	{
 		ft_putstr_fd("Total moves: ", 1);
 		ft_putnbr(env->tot);

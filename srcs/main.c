@@ -12,37 +12,37 @@
 
 #include "../push_swap.h"
 
-static void	algo_option(int argc, char **argv, t_env *env)
+static void	algo_option(int ac, char **av, t_env *env)
 {
-	if (argc <= env->index)
+	if (ac <= env->index)
 		return ;
-	if (argv[env->index][0] == '-' && argv[env->index][1] == 'a')
+	if (av[env->index][0] == '-' && av[env->index][1] == 'a')
 	{
-		if (ft_strequ("-a0", argv[env->index]) && ++(env->index))
+		if (ft_strequ("-a0", av[env->index]) && ++(env->index))
 			env->choice = 0;
-		else if (ft_strequ("-a1", argv[env->index]) && ++(env->index))
+		else if (ft_strequ("-a1", av[env->index]) && ++(env->index))
 			env->choice = 1;
-		else if (ft_strequ("-a2", argv[env->index]) && ++(env->index))
+		else if (ft_strequ("-a2", av[env->index]) && ++(env->index))
 			env->choice = 2;
-		else if (ft_strequ("-a3", argv[env->index]) && ++(env->index))
+		else if (ft_strequ("-a3", av[env->index]) && ++(env->index))
 			env->choice = 3;
-		else if (ft_strequ("-a4", argv[env->index]) && ++(env->index))
+		else if (ft_strequ("-a4", av[env->index]) && ++(env->index))
 			env->choice = 4;
 	}
 }
 
-static void	get_options(int argc, char **argv, t_env *env)
+static void	get_options(int ac, char **av, t_env *env)
 {
-	while (argc > env->index)
+	while (ac > env->index)
 	{
-		if (ft_strequ("-p", argv[env->index]) && (env->index)++)
-			env->options += !(env->options & 1) ? 1 : 0;
-		else if (ft_strequ("-t", argv[env->index]) && ++(env->index))
-			env->options += !(env->options & 2) ? 2 : 0;
-		else if (ft_strequ("-d", argv[env->index]) && ++(env->index))
-			env->options += !(env->options & 8) ? 8 : 0;
-		else if (ft_strequ("-rp", argv[env->index]) && ++(env->index))
-			env->options += !(env->options & 16) ? 16 : 0;
+		if (ft_strequ("-p", av[env->index]) && (env->index)++)
+			env->options += !OPT_PRINT ? 1 : 0;
+		else if (ft_strequ("-t", av[env->index]) && ++(env->index))
+			env->options += !OPT_COUNT ? 2 : 0;
+		else if (ft_strequ("-d", av[env->index]) && ++(env->index))
+			env->options += !OPT_STEP ? 8 : 0;
+		else if (ft_strequ("-rp", av[env->index]) && ++(env->index))
+			env->options += !OPT_RPRINT ? 16 : 0;
 		else
 			break ;
 	}
@@ -50,7 +50,7 @@ static void	get_options(int argc, char **argv, t_env *env)
 		env->options -= 16;
 }
 
-int			main(int argc, char **argv)
+int			main(int ac, char **av)
 {
 	t_env	env;
 
@@ -64,9 +64,9 @@ int			main(int argc, char **argv)
 	env.tot = 0;
 	env.options = 0;
 	env.choice = 4;
-	get_options(argc, argv, &env);
-	algo_option(argc, argv, &env);
-	if (get_stack(argc, argv, &env) >= 0)
+	get_options(ac, av, &env);
+	algo_option(ac, av, &env);
+	if (get_stack(ac, av, &env) >= 0)
 		begin_sort(&env);
 	else
 		ft_putstr_fd("Error\n", 2);

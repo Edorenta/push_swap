@@ -50,16 +50,16 @@ void				op_rb(t_env *env);
 void				op_rr(t_env *env);
 void				op_rra(t_env *env);
 void				op_rrb(t_env *env);
-void				op_revrr(t_env *env);
+void				op_rrr(t_env *env);
 
-int					get_stack(int argc, char **argv, t_env *env);
+int					get_stack(int ac, char **av, t_env *env);
 void				begin_sort(t_env *env);
 void				init_op1(t_env *env);
 
 int					is_sorted(t_env *env);
 void				free_stack(t_elem **start, t_elem **end);
 void				put_option(t_env *env);
-void				print_pause(t_env *env);
+void				put_pause(t_env *env);
 
 void				ez_bubble_sort(t_env *env);
 void				fifo_bubble_sort(t_env *env);
