@@ -3,41 +3,81 @@ var win = {
     h : Math.max(document.documentElement.clientHeight, window.innerHeight || 0),
 };
 
-var bars = [];
-var vals = [];
-
+var max;
+var min;
+var mult;
+var data;
+var stacks = [];
+var it = 0;
 var canvas;
-var nb_x;
-var step;
-var b_width;
-var x_pad = 0.05 * win.w;
-var y_pad = 0;
+var nb_data;
+var x_g_pad = win.w / 9.2;
+var x_pad = x_g_pad / 4;
 var h_fact;
+var looping = false;
+var stop_next = false;
 
-class Bar {
-	constructor(val, pos) {
-		this.val = val;
-		this.x = x_pad + b_width * pos;
-		this.y = y_pad + h_fact * val;
-	}
-	display() {
-        strokeWeight(4);
-        stroke('green');
-        fill(0);
-        rect(30, 20, this.x, this.y);
-	}
+Array.prototype.max = function() {
+    return Math.max.apply(null, this);
+};
+
+Array.prototype.min = function() {
+    return Math.min.apply(null, this);
+};
+
+class Stacks {
+    constructor(pass) {
+        this.a = [];
+        this.b = [];
+        this.op = pass.op;
+        this.na = Object.keys(pass.a).length;
+        this.nb = Object.keys(pass.b).length;
+        this.nx = this.na + this.nb;
+        this.step = (win.w / 2.2) / Math.max(this.na, this.nb);
+        for (let i = 0; i < this.na; i++) 
+            this.a[i] = pass.a[i] - min;
+        for (let i = 0; i < this.nb; i++)
+            this.b[i] = pass.b[i] - min;
+    }
+    display() {
+        let x;
+        let y;
+        strokeWeight(1);
+        stroke(color(211,140,0));
+        fill(color(50,50,50));
+        for (let i = 0; i < this.na; i++) {
+            y = this.a[i] * mult;
+            x = x_pad + (this.step) * i;
+            rect(x, -y, this.step, y);
+        }
+        stroke(color(0,180,0));
+        fill(color(50,50,50));
+        for (let i = 0; i < this.nb; i++) {
+            y = this.b[i] * mult;
+            x = (win.w / 2) + x_pad + (this.step) * i;
+            rect(x, -y, this.step, y);
+        }
+        if (stop_next == true) {
+            noLoop();
+            stop_next = false;
+        }
+    }
 }
 
 function setup() {
-    let pos = 0;
-    let min = Math.min(vals);
-    let max = Math.max(vals);
+    noLoop();
+    //document.getElementById("title_div").className += "rubberBand animated";
+    let commands = document.getElementById('commands').innerHTML;
+    data = JSON.parse(commands).Stacks;
+    nb_data = Object.keys(data).length;
+    console.log(data);
+    max = Math.max(data[0].a.max(), data[0].b.max());
+    min = Math.min(data[0].a.min(), data[0].b.min());
+    mult = (win.h / 1.5) / (max - min);
+    for (let pass = 0; pass < nb_data; pass++)
+        stacks[pass] = new Stacks(data[pass]);
     canvas = createCanvas(win.w, win.h);
-    nb_x = vals.length;
-    h_fact = height * 0.65 / (max - min);
-    step = 0.9 * width / nb_x;
-    for (let i = 0; i < nb_x; i++)
-        bars[i] = new Bar(vals[i] - min, ++pos);
+
 }
 
 function canvas_resize() {
@@ -47,14 +87,33 @@ function canvas_resize() {
 }
 
 function set_origin() {
-    translate(0, height / 5 * 4); //set bottom left as origin
+    translate(0, height / 6 * 5); //set bottom left as origin
+    background(0);
+    stroke(255);
+    strokeWeight(1);
+    line(0, 0, win.w, 0);
+    line(win.w / 2, 0, win.w / 2, -win.h / 6 * 4);
 }
 
 function draw() {
     canvas_resize();
     set_origin();
-    background(1);
-    fill(255);
-    for (let i = 0; i < nb_x; i++)
-        bars.display
+    stacks[it].display();
+    if (it < nb_data - 1)
+        it++;
+}
+
+function _reset() {
+    it = 0;
+}
+
+function _next() {
+    stop_next = true;    
+    loop();
+}
+
+function _switch() {
+    document.getElementById('bt1').innerHTML = looping ? "START" : "STOP";
+    looping ? noLoop() : loop();
+    looping = looping ? 0 : 1;
 }

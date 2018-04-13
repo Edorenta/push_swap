@@ -56,16 +56,15 @@ inline static void	put_tot(t_env *env)
 void				begin_sort(t_env *env)
 {
 	OPT_JSON ? psfd("{\"Stacks\":[", 1) : 0;
+	OPT_JSON ? put_operation("init", env) : 0;
 	if (OPT_PRINT || OPT_RPRINT)
 	{
 		psfd("-------- BEFORE SORT --------\n", 1);
 		put_stacks(env);
 		ft_putchar('\n');
 	}
-	if (env->a_first)
-		init_op1(env);
-	if (env->a_first)
-		algo_picker(env);
+	env->a_first ? init_op1(env) : 0;
+	env->a_first ? algo_picker(env) : 0;
 	(OPT_FREEZE || OPT_JSON) ? 0 : ft_putchar('\n');
 	if (OPT_PRINT || OPT_RPRINT)
 	{

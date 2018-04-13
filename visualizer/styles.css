@@ -3,6 +3,105 @@ html, body {
     height: 100%; 
     padding: 0;
     margin: 0;
+    background-color: black;
+}
+
+.animated {
+    animation-duration: 1s;
+    animation-fill-mode:both
+}
+.animated.infinite {
+    animation-iteration-count:infinite
+}
+.animated.hinge {
+    animation-duration: 2s
+}
+.animated.bounceIn,.animated.bounceOut,.animated.flipOutX,.animated.flipOutY{
+    animation-duration: .75s
+}
+
+/* Rubber band */
+@-webkit-keyframes rubberBand {
+  from {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+
+  30% {
+    -webkit-transform: scale3d(1.25, 0.75, 1);
+    transform: scale3d(1.25, 0.75, 1);
+  }
+
+  40% {
+    -webkit-transform: scale3d(0.75, 1.25, 1);
+    transform: scale3d(0.75, 1.25, 1);
+  }
+
+  50% {
+    -webkit-transform: scale3d(1.15, 0.85, 1);
+    transform: scale3d(1.15, 0.85, 1);
+  }
+
+  65% {
+    -webkit-transform: scale3d(0.95, 1.05, 1);
+    transform: scale3d(0.95, 1.05, 1);
+  }
+
+  75% {
+    -webkit-transform: scale3d(1.05, 0.95, 1);
+    transform: scale3d(1.05, 0.95, 1);
+  }
+
+  to {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+@keyframes rubberBand {
+  from {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+
+  30% {
+    -webkit-transform: scale3d(1.25, 0.75, 1);
+    transform: scale3d(1.25, 0.75, 1);
+  }
+
+  40% {
+    -webkit-transform: scale3d(0.75, 1.25, 1);
+    transform: scale3d(0.75, 1.25, 1);
+  }
+
+  50% {
+    -webkit-transform: scale3d(1.15, 0.85, 1);
+    transform: scale3d(1.15, 0.85, 1);
+  }
+
+  65% {
+    -webkit-transform: scale3d(0.95, 1.05, 1);
+    transform: scale3d(0.95, 1.05, 1);
+  }
+
+  75% {
+    -webkit-transform: scale3d(1.05, 0.95, 1);
+    transform: scale3d(1.05, 0.95, 1);
+  }
+
+  to {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+.  {
+  -webkit-animation-name: rubberBand;
+  animation-name: rubberBand;
+}
+
+.rubberBand{
+    animation-name:rubberBand
 }
 
 /* Shutter Out Vertical */
@@ -19,11 +118,11 @@ html, body {
   content: '';
   position: absolute;
   border: #e1e1e1 solid 0.15vw;
-  border-radius: 1.5vw;
-  top: -4vw;
-  right: -4vw;
-  bottom: -4vw;
-  left: -4vw;
+  border-radius: 0.3vw;
+  top: -1.5vw;
+  right: -1.5vw;
+  bottom: -1.5vw;
+  left: -1.5vw;
   opacity: 0;
   -webkit-transition-duration: 0.3s;
   transition-duration: 0.3s;
@@ -41,18 +140,18 @@ html, body {
 /* CLASSES */
 .intro_button {
     font-family: 'Tahoma';
-    font-size: 2.5vw;
+    font-size: 1.8vw;
     font-style: normal;
     font-weight: 400;
-    height: 8vw;
-    width: 40vw;
-    border-width: 0.3vw;
-    border-radius: 1.5vw;
+    height: 4vw;
+    width: 25vw;
+    border-width: 0.2vw;
+    border-radius: 0.3vw;
     border-color: #fff;
     background: transparent;
     background: #000;
     box-shadow: 0 2px 5px 0 rgba(0,0,0,.18), 0 1px 5px 0 rgba(0,0,0,.15);
-    color: #ffcb11;
+    color: cyan;
     display: block;
     margin: 0 auto;
     /*
@@ -63,7 +162,8 @@ html, body {
     */
 }
 .intro_button:hover {
-    background: #ffcb11;
+    transition-duration: 0.5s;
+    background: cyan;
     color: #000;
 }
 
@@ -71,26 +171,26 @@ html, body {
     position: absolute;
     color: cyan;
     font-family: 'Tahoma';
-    font-size: 3vw;
+    font-size: 1.2vw;
     font-style: normal;
     font-weight: 400;
     width: 100vw;
-    height: 15vh;
+    height: 10vh;
     display: grid;
     grid-template-columns: 90vw;
     grid-gap: 0vw;
     align-items: center;
     justify-content: center;
     text-align: center;
-    vertical-align: middle;
+    vertical-align: text-top;
     background-color: transparent;
 }
 
-#title {
-  font-weight: 500;
-}
-
-#input_div {
+#commands_div {
+    font-family: 'Courier New';
+    font-size: 0.2vw;
+    font-style: normal;
+    font-weight: 400;
     visibility: hidden;
     position: absolute;
     top: 17vh;
@@ -108,12 +208,12 @@ html, body {
 
 #menu_div {
     position: absolute;
-    top: 80vh;
+    top: 86vh;
     width: 100vw;
-    height: 20vh;
+    height: 10vh;
     display: grid;
-    grid-template-columns: 40vw 40vw;
-    grid-gap: 5vw;
+    grid-template-columns: 30vw 30vw 30vw;
+    grid-gap: 0vw;
     align-items: center;
     justify-content: center;
     text-align: center;

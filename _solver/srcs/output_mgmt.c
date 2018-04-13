@@ -19,7 +19,7 @@ void		put_operation(const char *op, t_env *env)
 		((TOT_OP) != 1 && !OPT_FREEZE) ? ft_putchar(32) : 0;
 		psfd(op, 1);
 		(OPT_FREEZE) ? put_pause(env) : 0;
-		ft_putchar(10);
+		//ft_putchar(10);
 	}
 	else
 	{

@@ -37,9 +37,6 @@ inline static int	putuse(int fd)
 
 inline static int	check_input(int ac, char **av)
 {
-	int i;
-
-	i = 0;
 	if (ac < 2)
 		return (putuse(1));
 	return (1);
@@ -115,6 +112,9 @@ int					main(int ac, char **av)
 	if (get_stack(ac, av, &env) >= 0)
 		begin_sort(&env);
 	else
+	{
 		psfd("Error\n", 2);
+		putuse(2);
+	}
 	return (0);
 }

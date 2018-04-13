@@ -8,16 +8,17 @@
         <script src="visualizer.js"></script>
     </head>
     <body>
-        <div id="title_div">
+        <div id="title_div" class="animated rubberBand">
             <h1 id="title">Push Swap Visualizer</h1>
         </div>
-        <div id="input_div">
-            <p id="integers"></p>
-            <p id="commands"></p>
+        <div id="commands_div">
+            <p id="commands">
+            </p>
         </div>
         <div id="menu_div">
-            <button class="intro_button hvr-outline-in" type="button" onclick="window.location.href='/game'">START</button>
-            <button class="intro_button hvr-outline-in" type="button" onclick="window.location.href='/game'">RESET</button>
+            <button id="bt1" class="intro_button hvr-outline-in" type="button" onclick="_switch()">START</button>
+            <button id="bt2" class="intro_button hvr-outline-in" type="button" onclick="_next()">NEXT MOVE</button>
+            <button id="bt3" class="intro_button hvr-outline-in" type="button" onclick="_reset()">RESET</button>
         </div>
     </body>
 </html>

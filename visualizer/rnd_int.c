@@ -4,18 +4,36 @@
 
 int main (int ac, char **av)
 {
-	time_t	t;
-	int		min = (av[2]) ? atoi(av[2]) : 0;
-	int		max = (av[3]) ? atoi(av[3]) : 1000;
-	long	n = (long)RAND_MAX;
-	printf("min: %d max: %d\n", min, max);
-	srand((unsigned) time(&t));
-	for(int i = 0; i < atoi(av[1]); i++)
+	time_t			t;
+    int 			r;
+    int 			unique;
+    unsigned int 	n = atoi(av[1]);
+	unsigned int 	list[n];
+    unsigned int 	min = ac > 2 ? atoi(av[2]) : 0;
+    unsigned int 	max = ac > 3 ? atoi(av[3]) : 1000;
+	if ((max - min) < n)
 	{
-		while (n * (max - min) / s
-		n = (long)rand();
-		if (rand() * max /)
-		printf("%d\n", (int)((double)rand() * (double)(max) / (double)(max)) + min);
+		dprintf(2, "impossible to generate %d unique integers in [%d;%d]\n", n, min, max);
+		max = min + n;
+		dprintf(2, "interval reset to [%d;%d]\n", min, max);
+	}
+    unsigned int 	range = 1 + max - min;
+    unsigned int 	buckets = RAND_MAX / range;
+    unsigned int 	limit = buckets * range;
+	dprintf(2, "generating %d random integers in [%d;%d] in list.txt\n", n, min, max);
+	srand((unsigned) time(&t));
+	for(int i = 0; i < n; i++)
+	{	
+		unique = 1;
+    	do
+        	r = rand();
+    	while (r >= limit);
+    	list[i] = (min + (r / buckets));
+    	for (int j = 0; j < i && unique; j++)
+    		unique = list[j] == list[i] ? 0 : unique;
+		unique ? printf("%d", list[i]) : (--i);
+		if (unique)
+			i == (n - 1) ? printf("%c", '\n') : printf("%c", ' ');
 	}
 	return(0);
 }
