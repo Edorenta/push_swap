@@ -1,3 +1,5 @@
+/* RANDOM UNIQUE INTEGER LIST GENERATOR by pde-rent */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -7,7 +9,7 @@ int main (int ac, char **av)
 	time_t			t;
     int 			r;
     int 			unique;
-    unsigned int 	n = atoi(av[1]);
+    unsigned int 	n = ac > 1 ? atoi(av[1]) : 500;
 	unsigned int 	list[n];
     unsigned int 	min = ac > 2 ? atoi(av[2]) : 0;
     unsigned int 	max = ac > 3 ? atoi(av[3]) : 1000;
