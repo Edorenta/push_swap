@@ -1,13 +1,5 @@
 /* ALL THE FOLLOWING STYLING IS DEDICATED TO THE SPEED BAR */
 
-#speed_set {
-  position: absolute;
-  padding-top: 3.5vh;
-  width: 27vw;
-  height: 100%;
-  left: 63vw;
-}
-
 #speed_box {
   position: absolute;
   left: calc(50% - 28px);

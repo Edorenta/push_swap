@@ -13,10 +13,10 @@ int main (int ac, char **av)
 	unsigned int 	list[n];
     unsigned int 	min = ac > 2 ? atoi(av[2]) : 0;
     unsigned int 	max = ac > 3 ? atoi(av[3]) : 1000;
-	if ((max - min) < n)
+	if ((max - min + 1) < n)
 	{
 		dprintf(2, "impossible to generate %d unique integers in [%d;%d]\n", n, min, max);
-		max = min + n;
+		max = min + n - 1;
 		dprintf(2, "interval reset to [%d;%d]\n", min, max);
 	}
     unsigned int 	range = 1 + max - min;

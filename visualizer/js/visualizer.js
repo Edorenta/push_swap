@@ -1,4 +1,5 @@
 /* THE FOLLOWING FUNCTION MAKES THE SPEED FOLLOW THE BAR THUMB */
+"use strict";
 
 var win = {
     w : Math.max(document.documentElement.clientWidth, window.innerWidth || 0),
@@ -7,6 +8,11 @@ var win = {
 var bar_w;
 
 /* THE FOLLOWING FUNCTION CODE USES P5JS FOR CANVAS RENDERING AND IS THE COREOF THE VISUALIZER */
+
+var speed_slider;
+var speed_box;
+var container;
+var commands;
 
 var max;
 var min;
@@ -38,11 +44,12 @@ class Stacks {
         this.nx = this.na + this.nb;
         this.step = (win.w / 2.2) / Math.max(this.na, this.nb);
         for (let i = 0; i < this.na; i++) 
-            this.a[i] = pass.a[i] - min;
+            this.a[i] = pass.a[i] - min + 1;
         for (let i = 0; i < this.nb; i++)
-            this.b[i] = pass.b[i] - min;
+            this.b[i] = pass.b[i] - min + 1;
     }
     display() {
+        this.step = (win.w / 2.2) / Math.max(this.na, this.nb);
         let x;
         let y;
         let moved_a = [];
@@ -125,20 +132,29 @@ class Stacks {
             }
             else rect(x, -y, this.step - 2, y);
         }
+        if (looping && it == (nb_data - 1)) {
+            document.getElementById('bt1').innerHTML = looping ? "▶ START" : "▣ STOP";
+            looping ? noLoop() : loop();
+            looping = looping ? 0 : 1;
+        }
     }
 }
 
 function refresh_box() {
-  speed_box.style.left = Math.round(((bar_w - 14) * (speed_slider.value) / 100) - 21, 0) + 'px';
-  set_speed();
+    bar_w = container.offsetWidth;
+    speed_box.style.left = Math.round(((bar_w - 14) * (speed_slider.value) / 60) - 21, 0) + 'px';
+    set_speed();
 }
 
 function setup() {
     noLoop();
-    var speed_slider = document.getElementById('speed_slider');
-    var speed_box = document.getElementById('speed_box');
-    var container = document.getElementById('speed_set');
-    var commands = document.getElementById('commands').innerHTML;
+    speed_slider = document.getElementById('speed_slider');
+    speed_box = document.getElementById('speed_box');
+    container = document.getElementById('speed_set');
+    commands = document.getElementById('commands').innerHTML;
+    canvas = createCanvas(win.w, win.h);
+    //canvas.position(0, 0);
+    //canvas.style('display', 'absolute');
     bar_w = container.offsetWidth;
     speed_slider.addEventListener('input', refresh_box);
     speed_box.addEventListener('input', refresh_box);
@@ -151,7 +167,6 @@ function setup() {
     mult = (win.h / 1.5) / (max - min);
     for (let pass = 0; pass < nb_data; pass++)
         stacks[pass] = new Stacks(data[pass]);
-    canvas = createCanvas(win.w, win.h);
 }
 
 function canvas_resize() {
@@ -160,17 +175,24 @@ function canvas_resize() {
     resizeCanvas(win.w, win.h, true);
 }
 
+function windowResized() {
+    canvas_resize();
+    set_origin();
+    set_speed();
+    stacks[it].display();
+}
+
 function set_origin() {
     translate(0, height / 6 * 5); //set bottom left as origin
     background(0);
-    stroke(255);
+    stroke(color(150,150,150));
     strokeWeight(1);
     line(0, 0, win.w, 0);
-    line(win.w / 2, 0, win.w / 2, -win.h / 6 * 4);
+    line(win.w / 2, 0, win.w / 2, -win.h / 6 * 4.15);
 }
 
 function set_speed() {
-    frameRate(speed_box.value * 60 / 100);
+    frameRate(speed_box.value * 1);
 }
 
 function draw() {
@@ -179,7 +201,6 @@ function draw() {
     set_speed();
     stacks[it].display();
     if (it < nb_data - 1) it++;
-    if (looping && it == nb_data) _switch();
 }
 
 function _reset() {
@@ -194,7 +215,8 @@ function _next() {
 }
 
 function _switch() {
-    document.getElementById('bt1').innerHTML = looping ? "START" : "STOP";
+    document.getElementById('bt1').innerHTML = looping ? "▶ START" : "▣ STOP";
     looping ? noLoop() : loop();
     looping = looping ? 0 : 1;
+    it == nb_data -1 ? _reset() : 0;
 }

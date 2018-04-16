@@ -2,56 +2,151 @@
 
 html,
 body {
-  height: 100%;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  background-color: black;
+    position: fixed; 
+    overflow-y: hidden;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background-color: transparent;
+}
+canvas {
+   position:absolute;
+   top: 0;
+   left: 0;
+   width: 100vw;
+   height: 100vh;
+   z-index: -1;
 }
 
-#title_div {
+#title {
+    position: absolute;
+    color: cyan;
+    background-color: #2a2d2c;
+    font-family: 'Tahoma';
+    font-size: 3.2vh;
+    font-style: normal;
+    font-weight: 400;
+    top: 0vh;
+    width: 100vw;
+    height: 6vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#a_title {
     position: absolute;
     color: cyan;
     font-family: 'Tahoma';
-    font-size: 1.2vw;
+    font-size: 2vh;
     font-style: normal;
-    font-weight: 400;
-    width: 100vw;
-    height: 10vh;
-    display: grid;
-    grid-template-columns: 90vw;
-    grid-gap: 0vw;
+    font-weight: normal;
+    left: 0vw;
+    top: 6vh;
+    width: 50vw;
+    height: 3vh;
+    display: flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
-    vertical-align: text-top;
-    background-color: transparent;
+    background-color: black;
+    border-top: 1px solid grey;
+    border-bottom: 1px solid grey;
+}
+
+#ptr_1 {
+    position: absolute;
+    color: cyan;
+    font-family: 'Tahoma';
+    font-size: 2vh;
+    font-style: normal;
+    font-weight: normal;
+    left: 0vw;
+    top: 6vh;
+    width: 50vw;
+    height: 3vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    border-top: 1px solid grey;
+    border-bottom: 1px solid grey;
+}
+
+#b_title {
+    position: absolute;
+    color: cyan;
+    font-family: 'Tahoma';
+    font-size: 2vh;
+    font-style: normal;
+    font-weight: normal;
+    left: 50vw;
+    top: 6vh;
+    width: 50vw;
+    height: 3vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    border-top: 1px solid grey;
+    border-bottom: 1px solid grey;
+}
+
+#menu_title {
+    position: absolute;
+    color: cyan;
+    font-family: 'Tahoma';
+    font-size: 2vh;
+    font-style: normal;
+    font-weight: normal;
+    left: 0vw;
+    top: 87vh;
+    width: 60vw;
+    height: 3vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    border-top: 1px solid grey;
+    border-bottom: 1px solid grey;
+}
+
+#speed_title {
+    position: absolute;
+    color: cyan;
+    font-family: 'Tahoma';
+    font-size: 2vh;
+    font-style: normal;
+    font-weight: normal;
+    left: 60vw;
+    top: 87vh;
+    width: 40vw;
+    height: 3vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    border-top: 1px solid grey;
+    border-bottom: 1px solid grey;
 }
 
 #commands_div {
-    font-family: 'Courier New';
-    font-size: 0.2vw;
-    font-style: normal;
-    font-weight: 400;
-    visibility: hidden;
     position: absolute;
-    top: 17vh;
+    visibility: hidden;
+    font-size: 0%;
+    border-top: 1px solid grey;
+    border-bottom: 1px solid grey;-family: 'Tahoma';
+    font-weight: 100;
+    top: 0vh;
     width: 100vw;
-    height: 10vh;
-    display: grid;
-    grid-template-columns: 100vw;
-    grid-gap: 5vw;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    vertical-align: middle;
-    background-color: transparent;
+    height: 50%;
+    display: none;
 }
 
 #menu_div {
     position: absolute;
-    top: 86vh;
+    top: 90vh;
     width: 100vw;
     height: 10vh;
     display: grid;
@@ -61,33 +156,24 @@ body {
     justify-content: center;
     text-align: center;
     vertical-align: middle;
-    background-color: transparent;
+    background-color: #2a2d2c;
 }
 
-#buttons_title {
-    position: absolute;
-    top: 82vh;
-    left: 69.8vw;
-    font-family: 'Tahoma';
-    color:cyan;
-}
-
-#speed_title {
-    position: absolute;
-    top: 82vh;
-    left: 68.4vw;
-    font-family: 'Tahoma';
-    font-size: 1.6vw;
-    color:cyan;
+#speed_set {
+  position: absolute;
+  padding-top: 3.5vh;
+  width: 34vw;
+  height: 100%;
+  left: 63vw;
 }
 
 /* CLASSES */
 .intro_button {
     font-family: 'Tahoma';
-    font-size: 1.8vw;
+    font-size: 2vh;
     font-style: normal;
     font-weight: 400;
-    height: 4vw;
+    height: 3vw;
     width: 18vw;
     border-width: 0.2vw;
     border-radius: 0.3vw;
@@ -107,6 +193,5 @@ body {
 }
 .intro_button:hover {
     transition-duration: 0.5s;
-    background: cyan;
-    color: #000;
+    filter: invert(78%);
 }
