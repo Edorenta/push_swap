@@ -2,7 +2,7 @@ make all
 cd visualizer/c
 echo "compiling random unique number generator"
 gcc rnd_int.c -o rnd_int
-gcc cmd_json.c -o cmd_json
+gcc list_jsonifier.c -o list_jsonifier
 #gcc json_maker.c -o json_maker.exe
 ./rnd_int ${1:-100} ${2:-0} ${3:-99} > ../../unsorted_list.txt
 cd ../..
