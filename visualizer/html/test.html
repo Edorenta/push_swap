@@ -1,0 +1,83 @@
+<html>
+<style type="text/css">
+body {
+  color: #fff;
+  background: #000;
+}
+
+#container svg {
+  margin: 0 auto;
+}
+
+.wrap {
+    position: absolute;
+    color: cyan;
+    font-family: 'Tahoma';
+    font-size: 2vh;
+    font-style: normal;
+    font-weight: normal;
+    right: 0vh;
+    top: 0vh;
+	height: 25vh;
+	width: 20vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+}
+
+.caption {
+  font-family: monospace;
+}
+
+</style>
+  <body>
+    <div class="wrap">
+        <div id="container"></div>
+    </div>
+    <div class="caption">
+        <div id="values"></div>
+    </div>
+  </body>
+<script src="../js/addons/iro.min.js"></script>
+<script type="text/javascript">
+// Create a new color picker instance
+// https://rakujira.jp/projects/iro/docs/guide.html#Getting-Started
+var win = {
+    w : Math.max(document.documentElement.clientWidth, window.innerWidth || 0),
+    h : Math.max(document.documentElement.clientHeight, window.innerHeight || 0),
+};
+var example = new iro.ColorPicker("#container", {
+  width: win.h / 5,
+  height: win.h / 5,
+  color: {r: 255, g: 0, b: 0},
+  markerRadius: 10,
+  padding: 0,
+  sliderMargin: 24,
+  sliderHeight: 36,
+  borderWidth: 2,
+  borderColor: "#b4b4b4",
+  anticlockwise: true,
+  /*
+  css: {
+    "#txt_box": {
+      "background-color": "$color"
+    }
+  }
+  */
+});
+
+var values = document.getElementById("values");
+
+// https://rakujira.jp/projects/iro/docs/guide.html#color-change
+example.on("color:change", function(color){
+  values.innerHTML = [
+    "hex: " + color.hexString,
+    "rgb: " + color.rgbString,
+    "hsl: " + color.hslString,
+  ].join("<br>");
+});
+</script>
+  <head>
+  </head>
+</html>
